@@ -1,0 +1,4 @@
+<mat-card class="card-margin" (click)="openTask(task)">
+  <mat-card-title>{{task.title}}</mat-card-title>
+  <mat-card-subtitle>Programada para el día: {{task?.due_date | date:'dd/MM/yyyy':'utc'}}</mat-card-subtitle>
+</mat-card>
