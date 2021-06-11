@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-new-task',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewTaskComponent implements OnInit {
 
-  constructor() { }
+  task: FormGroup = this.fb.group({
+    title: ['', [Validators.required]],
+    due_date: [''],
+    creation_date: [''],
+    numeric_reference: [''],
+    observation: ['', [Validators.required]],
+    id: [''],
+    user_id: ['']
+  });
+
+  constructor(private fb: FormBuilder) {
+
+  }
 
   ngOnInit(): void {
   }

@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import {TaskListComponent} from "./tasks/task-list/task-list.component";
 import {TaskDetailComponent} from "./tasks/task-detail/task-detail.component";
+import {NewTaskComponent} from "./tasks/new-task/new-task.component";
 
 const routes: Routes = [
-  {path: 'task/:id', component: TaskDetailComponent},
+  {path: 'task', children: [{path: 'new', component: NewTaskComponent}, {path: ':id', component: TaskDetailComponent}]},
   {path: 'tasks/list', component: TaskListComponent},
   {path: '', component: HomeComponent}
 ];

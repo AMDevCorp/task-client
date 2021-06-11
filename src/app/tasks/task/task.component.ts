@@ -21,10 +21,10 @@ export class TaskComponent implements OnInit {
     this.dialog.open(TaskDetailComponent, {
       width: '95%',
       maxWidth: '500px',
-      height: '80%',
+      height: 'auto',
       maxHeight: 'auto',
-      position: {top: '95px'},
-      data: {task: task}
+      data: {task: task},
+      autoFocus: false
     }).afterClosed().subscribe(() =>{
     })
   }

@@ -1,19 +1,35 @@
-<h1>{{task.title}}</h1>
-<div class="mb-3 row" *ngIf="task.due_date">
-  <label for="due_date" class="col-sm-2 col-form-label">Fecha Programada:</label>
+<div class="mb-3 row" *ngIf="task.get('title')">
+  <label for="task_title" class="col-sm-2 col-form-label">Titulo:</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="due_date" disabled [value]="task.due_date | date:'dd/MM/yyyy HH:mm':'utc'">
+    <input type="text" class="form-control" id="task_title" [disabled]="disabled" [value]="task.get('title')?.value">
   </div>
 </div>
-<div class="mb-3 row" *ngIf="task.numeric_reference">
+<div class="mb-3 row" *ngIf="task.get('due_date')">
+  <label for="due_date" class="col-sm-2 col-form-label">Fecha Programada:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="due_date" [disabled]="disabled" [value]="task.get('due_date')?.value | date:'dd/MM/yyyy HH:mm':'utc'">
+  </div>
+</div>
+<div class="mb-3 row" *ngIf="task.get('numeric_reference')">
   <label for="numeric_reference" class="col-sm-2 col-form-label">Observación numérica:</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="numeric_reference" disabled [value]="task.numeric_reference">
+    <input type="text" class="form-control" id="numeric_reference" [disabled]="disabled" [value]="task.get('numeric_reference')?.value">
   </div>
 </div>
 <div class="mb-3 row">
-  <label for="observation" class="form-label">Example textarea</label>
+  <label for="observation" class="form-label">Obervations</label>
   <div class="col-sm-10">
-   <textarea class="form-control" id="observation" rows="5" disabled [value]="task.observation"></textarea>
+   <textarea class="form-control no-resize" id="observation" rows="5" [disabled]="disabled" [value]="task.get('observations')?.value"></textarea>
   </div>
 </div>
+<hr>
+<div class="d-flex justify-content-between">
+  <span class="footer-info">{{task.get('user_id')?.value}}</span>
+  <span class="footer-info">{{task.get('creation_date')?.value | date:'dd/MM/yyyy HH:mm':'utc'}}</span>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close class="btn-outline-danger">Cancel</button>
+  <button mat-raised-button *ngIf="disabled" (click)="disabled = false" class="btn-outline-primary">Editar</button>
+  <button mat-raised-button *ngIf="!disabled" class="btn-outline-primary">Guardar</button>
+</mat-dialog-actions>

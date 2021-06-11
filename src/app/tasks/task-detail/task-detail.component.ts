@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Task} from "../../models/Task";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-task-detail',
@@ -9,12 +9,24 @@ import {Task} from "../../models/Task";
 })
 export class TaskDetailComponent implements OnInit {
 
-  task: Task;
+  task: FormGroup = this.fb.group({
+    title: ['', [Validators.required]],
+    due_date: [''],
+    creation_date: [''],
+    numeric_reference: [''],
+    observation: ['', [Validators.required]],
+    id: [''],
+    user_id: ['']
+  });
 
-  constructor(private dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.task = Object.create(data.task);
+  disabled: boolean = true;
+
+  constructor(private dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) {
+    this.task.patchValue(data.task);
   }
 
   ngOnInit(): void {}
+
+
 
 }
