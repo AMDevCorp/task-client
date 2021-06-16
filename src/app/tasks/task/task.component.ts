@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Task} from "../../models/Task";
+import {Task} from "../../models/Tasks";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDetailComponent} from "../task-detail/task-detail.component";
 
@@ -20,10 +20,9 @@ export class TaskComponent implements OnInit {
   openTask(task: Task) {
     this.dialog.open(TaskDetailComponent, {
       width: '95%',
-      maxWidth: '500px',
       height: 'auto',
-      maxHeight: 'auto',
-      data: {task: task},
+      maxHeight: '800px',
+      data: {taskId: task.id},
       autoFocus: false
     }).afterClosed().subscribe(() =>{
     })

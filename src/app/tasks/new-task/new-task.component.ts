@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
+import {TaskService} from "../../services/tasks/task.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material/dialog";
+
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.component.html',
@@ -18,11 +23,20 @@ export class NewTaskComponent implements OnInit {
     user_id: ['']
   });
 
-  constructor(private fb: FormBuilder) {
-
-  }
+  constructor(private fb: FormBuilder, private taskService: TaskService,
+              private toast: MatSnackBar, private router: Router,private dialogRef: MatDialogRef<any>) {}
 
   ngOnInit(): void {
+  }
+
+  saveTask(task: FormGroup): void {
+    this.taskService.newTask(task.getRawValue()).subscribe(res => {
+      if(res.status === 201){
+        this.dialogRef.close()
+        this.toast.open('Tarea creada con éxito','Cerrar',{duration: 3000});
+        this.router.navigate(['/']);
+      }
+    });
   }
 
 }

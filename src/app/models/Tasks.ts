@@ -1,3 +1,7 @@
+export interface Tasks {
+  data: Task[];
+}
+
 export interface Task {
   title: string,
   due_date?: string,

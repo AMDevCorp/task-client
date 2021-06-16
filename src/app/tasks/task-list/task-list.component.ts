@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Task} from "../../models/Task";
+import {TaskService} from "../../services/tasks/task.service";
+import {Task} from "../../models/Tasks";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-task-list',
@@ -8,43 +10,21 @@ import {Task} from "../../models/Task";
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[] =  [{
-    id: '1',
-    title: 'Igna el re gay',
-    due_date: '2021-08-09T00:00:00.000Z',
-    creation_date: new Date().toString(),
-    observation: 'El igna es un re gay',
-    numeric_reference: 20000,
-    user_id: 'Agus el kpo'
-  },{
-    id: '2',
-    title: 'Igna el re gay',
-    due_date: '2021-08-09T00:00:00.000Z',
-    creation_date: new Date().toString(),
-    observation: 'El igna es un re gay',
-    numeric_reference: 20000,
-    user_id: 'Agus el kpo'
-  },{
-    id: '3',
-    title: 'Igna el re gay',
-    due_date: '2021-08-09T00:00:00.000Z',
-    creation_date: new Date().toString(),
-    observation: 'El igna es un re gay',
-    numeric_reference: 20000,
-    user_id: 'Agus el kpo'
-  },{
-    id: '4',
-    title: 'Igna el re gay',
-    due_date: '2021-08-09T00:00:00.000Z',
-    creation_date: new Date().toString(),
-    observation: 'El igna es un re gay',
-    numeric_reference: 20000,
-    user_id: 'Agus el kpo'
-  }]
+  tasks: Task[] = [];
+  loading: boolean = true;
+  type: string = ''
 
-  constructor() { }
+  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) {
+    activatedRoute.params.subscribe(res => {
+      this.type = res.type;
+    })
+  }
 
   ngOnInit(): void {
+    this.taskService.getAll(this.type).subscribe( res => {
+      this.tasks = res;
+      this.loading = false;
+    })
   }
 
 }
