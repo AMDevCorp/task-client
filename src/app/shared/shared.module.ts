@@ -6,23 +6,28 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {DigitOnlyDirective} from "../directives/digit-only.directive";
 import {MatProgressSpinnerModule, MatSpinner} from "@angular/material/progress-spinner";
+import { FilterComponent } from './filter/filter.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    DigitOnlyDirective
+    DigitOnlyDirective,
+    FilterComponent
   ],
   exports: [
     NavbarComponent,
     DigitOnlyDirective,
-    MatSpinner
+    MatSpinner,
+    FilterComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }
