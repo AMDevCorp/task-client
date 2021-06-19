@@ -20,7 +20,9 @@ export class TaskDetailComponent implements OnInit {
     numeric_reference: [''],
     observation: ['', [Validators.required]],
     id: [''],
-    user_id: ['']
+    user_id: [''],
+    calendar_event: [''],
+    event_id: ['']
   });
 
   loading: boolean = true;
@@ -40,11 +42,12 @@ export class TaskDetailComponent implements OnInit {
     })
   }
 
-  updateTask(task: FormGroup, id: number){
+  updateTask(task: FormGroup, id: string){
+    task.patchValue({due_date: new Date(new Date(task.getRawValue().due_date || new Date().toString()).toUTCString()).toISOString()});
     this.taskService.update(task.getRawValue(),id).subscribe(res => {
       if (res.status === 200) {
-        this.dialogRef.close()
         this.toast.open('Tarea modificada con éxito','Cerrar',{duration: 3000});
+        this.dialogRef.close()
       }
     });
   }

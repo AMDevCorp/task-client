@@ -21,6 +21,11 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+  getData(): void {
+    this.loading = true;
     this.taskService.getAll(this.type).subscribe( res => {
       this.tasks = res;
       this.loading = false;

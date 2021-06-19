@@ -15,7 +15,7 @@ export class RequestInterceptor implements HttpInterceptor {
         if(error.status === 0){
           this.snackBar.open('Se produjo un error. Vuelva a intentarlo luego.', 'Cerrar', { duration: 3000 });
         } else {
-          this.snackBar.open(error.error.error, 'Cerrar', { duration: 3000 });
+          this.snackBar.open(error.error.error.message, 'Cerrar', { duration: 3000 });
         }
         return throwError(error);
       })

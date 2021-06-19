@@ -12,6 +12,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {TaskRoutingModule} from "./task-routing.module";
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {TaskRoutingModule} from "./task-routing.module";
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    TaskRoutingModule
+    TaskRoutingModule,
+    MatIconModule,
+    MatMenuModule
   ]
 })
 export class TasksModule {

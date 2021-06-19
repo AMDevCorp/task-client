@@ -35,7 +35,35 @@ export class TaskService {
     return this.http.post(this.BASE_URL+'task',task,{ observe: 'response'});
   }
 
-  update(task: Task, id: number) {
+  update(task: Task, id: string) {
     return this.http.put(this.BASE_URL+'task/'+id,task,{ observe: 'response'});
+  }
+
+  delete(id: string) {
+    return this.http.delete(this.BASE_URL+'task/'+id,{observe: 'response'});
+  }
+
+  searchStruct() {
+    const struct = {
+      "title": [
+        "$regex"
+      ],
+      "user_id": [
+        "$eq"
+      ],
+      "creation_date": [
+        "$gt",
+        "$gte",
+        "$lt",
+        "$lte"
+      ],
+      "due_date": [
+        "$gt",
+        "$gte",
+        "$lt",
+        "$lte"
+      ]
+    }
+    return struct;
   }
 }

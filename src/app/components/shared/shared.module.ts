@@ -8,13 +8,17 @@ import {DigitOnlyDirective} from "../../directives/digit-only.directive";
 import {MatProgressSpinnerModule, MatSpinner} from "@angular/material/progress-spinner";
 import { FilterComponent } from './filter/filter.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     DigitOnlyDirective,
-    FilterComponent
+    FilterComponent,
+    DialogComponent
   ],
   exports: [
     NavbarComponent,
@@ -27,7 +31,9 @@ import {MatExpansionModule} from "@angular/material/expansion";
     SharedRoutingModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class SharedModule { }
