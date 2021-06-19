@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
+import {LoginComponent} from "./components/login/login.component";
+import {TokenGuard} from "./guards/token.guard";
 
 const routes: Routes = [
   {path: 'task',loadChildren: () => import('./components/tasks/tasks.module').then(m => m.TasksModule)},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent, canActivate: [TokenGuard]},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

@@ -13,12 +13,16 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {RequestInterceptor} from "./interceptors/request.interceptor";
 import localeEsAR from '@angular/common/locales/es-AR';
+import {TokenInterceptor} from "./interceptors/token.interceptor";
+import { LoginComponent } from './components/login/login.component';
+import {FormsModule} from "@angular/forms";
 registerLocaleData(localeEsAR, 'es-AR');
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +32,12 @@ registerLocaleData(localeEsAR, 'es-AR');
     TasksModule,
     MatButtonModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: localeEsAR, useValue: 'es-AR'}],
   bootstrap: [AppComponent]
 })
