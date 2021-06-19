@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Task} from "../../models/Tasks";
+import {Task} from "../../../models/Tasks";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDetailComponent} from "../task-detail/task-detail.component";
 

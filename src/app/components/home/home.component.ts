@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {NewTaskComponent} from "../../tasks/new-task/new-task.component";
+import {NewTaskComponent} from "../tasks/new-task/new-task.component";
 
 @Component({
   selector: 'app-home',
@@ -17,9 +17,8 @@ export class HomeComponent implements OnInit {
   newTask() {
     this.dialog.open(NewTaskComponent, {
       width: '95%',
-      maxWidth: '500px',
       height: 'auto',
-      maxHeight: 'auto',
+      maxHeight: '800px',
       autoFocus: false
     }).afterClosed().subscribe(() =>{
     })

@@ -12,7 +12,11 @@ export class RequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(error => {
-        this.snackBar.open(error.error.error, 'Cerrar', { duration: 3000 });
+        if(error.status === 0){
+          this.snackBar.open('Se produjo un error. Vuelva a intentarlo luego.', 'Cerrar', { duration: 3000 });
+        } else {
+          this.snackBar.open(error.error.error, 'Cerrar', { duration: 3000 });
+        }
         return throwError(error);
       })
     );

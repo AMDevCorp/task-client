@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import {TaskService} from "../../services/tasks/task.service";
+import {TaskService} from "../../../services/tasks/task.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {MatDialogRef} from "@angular/material/dialog";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-new-task',
@@ -18,9 +19,10 @@ export class NewTaskComponent implements OnInit {
     due_date: [''],
     creation_date: [''],
     numeric_reference: [''],
-    observation: ['', [Validators.required]],
+    observation: [''],
     id: [''],
-    user_id: ['']
+    user_id: [''],
+    calendar_event: [false]
   });
 
   constructor(private fb: FormBuilder, private taskService: TaskService,
@@ -30,6 +32,7 @@ export class NewTaskComponent implements OnInit {
   }
 
   saveTask(task: FormGroup): void {
+    task.patchValue({due_date: new Date(new Date(task.getRawValue().due_date || new Date().toString()).toUTCString()).toISOString()});
     this.taskService.newTask(task.getRawValue()).subscribe(res => {
       if(res.status === 201){
         this.dialogRef.close()
@@ -38,5 +41,4 @@ export class NewTaskComponent implements OnInit {
       }
     });
   }
-
 }

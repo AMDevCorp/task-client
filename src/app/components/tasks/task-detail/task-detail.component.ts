@@ -1,14 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TaskService} from "../../services/tasks/task.service";
+import {TaskService} from "../../../services/tasks/task.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {ActivatedRoute, Router} from "@angular/router";
+import {DatePipe, formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
-  styleUrls: ['./task-detail.component.scss']
+  styleUrls: ['./task-detail.component.scss'],
+  providers: [DatePipe]
 })
 export class TaskDetailComponent implements OnInit {
 
@@ -27,14 +28,14 @@ export class TaskDetailComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any,
               private fb: FormBuilder, private taskService: TaskService,private toast: MatSnackBar,
-              private router: Router) {
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
     this.taskService.getOne(this.data.taskId).subscribe(res => {
       this.task.patchValue(res);
       this.task.disable();
-      this.task.patchValue({due_date: new Date(this.task.get('due_date')?.value).toISOString().substr(0,16)});
+      this.task.patchValue({due_date: this.datePipe.transform(res.due_date,'yyyy-MM-ddTHH:mm')});
       this.loading = false;
     })
   }

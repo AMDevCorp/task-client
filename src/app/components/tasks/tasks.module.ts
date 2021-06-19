@@ -11,6 +11,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import {TaskRoutingModule} from "./task-routing.module";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {SharedModule} from "../shared/shared.module";
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TaskRoutingModule
   ]
 })
 export class TasksModule {

@@ -9,5 +9,6 @@ export interface Task {
   numeric_reference?: number,
   observation: string,
   id: string,
-  user_id: string
+  user_id: string,
+  calendar_event?: boolean
 }
