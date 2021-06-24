@@ -25,22 +25,17 @@ export class TokenService {
     };
     return this.http.post<Token>(this.BASE_URL+'auth/refresh', token).pipe(
       tap((data)=>{
-        this.saveTokenInStorage(data.access_token);
-        this.saveRefreshTokenInStorage(data.refresh_token);
+        this.saveTokenInStorage(JSON.stringify(data));
       })
     );
   }
 
-  saveTokenInStorage(token: string): void {
+  saveTokenInStorage(token: any): void {
     localStorage.setItem('token', token);
   }
 
   getTokenFromStorage(): string | null {
     return localStorage.getItem('token');
-  }
-
-  saveRefreshTokenInStorage(refreshToken: string): void {
-    localStorage.setItem('refreshToken', refreshToken);
   }
 
   getRefreshTokenFromStorage(): string | null {
