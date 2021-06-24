@@ -23,7 +23,7 @@ export class TokenService {
     let token: Token = {
       refresh_token: <any>this.getRefreshTokenFromStorage()
     };
-    return this.http.post<Token>(this.BASE_URL+'auth/login/refresh', token).pipe(
+    return this.http.post<Token>(this.BASE_URL+'auth/refresh', token).pipe(
       tap((data)=>{
         this.saveTokenInStorage(data.access_token);
         this.saveRefreshTokenInStorage(data.refresh_token);
@@ -44,6 +44,6 @@ export class TokenService {
   }
 
   getRefreshTokenFromStorage(): string | null {
-    return localStorage.getItem('refreshToken');
+    return "Bearer "+JSON.parse(<string>localStorage.getItem('token'))["refresh_token"];
   }
 }
